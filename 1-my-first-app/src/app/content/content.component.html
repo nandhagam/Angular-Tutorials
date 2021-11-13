@@ -1,0 +1,7 @@
+<div class="content-container">
+  <div [class]="buttonClicked ? 'green-class': 'red-class'">
+    <input type="number" [(ngModel)]="count" />
+    <button (click)="onBtnClick()">Click</button>
+    Current Count is {{count}}
+  </div>
+</div>
