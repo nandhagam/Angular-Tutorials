@@ -1,7 +1,10 @@
 <div class="content-container">
   <div [class]="buttonClicked ? 'green-class': 'red-class'">
     <input type="number" [(ngModel)]="count" />
-    <button (click)="onBtnClick()">Click</button>
+    <br/>
+    <button (mouseup)="onBtnClick($event)" id="btn">Click</button>
+    <br/>
+    <br/>
     Current Count is {{count}}
   </div>
 </div>

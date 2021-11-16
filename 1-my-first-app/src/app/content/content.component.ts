@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-content',
@@ -11,14 +11,24 @@ export class ContentComponent implements OnInit {
 
   @Output('increaseCount') increaseCount = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(public cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+
   }
 
-  onBtnClick() {
-    this.increaseCount.emit(this.count)
-    this.buttonClicked = !this.buttonClicked;
+  ngAfterContentChecked() {
+
   }
 
+  onBtnClick = ($event: any) => {
+    if($event.keyCode === 13){
+      this.increaseCount.emit(this.count)
+      this.buttonClicked = !this.buttonClicked;
+      console.log($event);
+    } else {
+      console.error("Wrong key pressed.")
+    }
+   
+  }
 }
