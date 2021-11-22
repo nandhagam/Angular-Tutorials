@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -11,7 +12,11 @@ export class ContentComponent implements OnInit {
 
   @Output('increaseCount') increaseCount = new EventEmitter<number>();
 
-  constructor(public cd: ChangeDetectorRef) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe((param) => {
+      this.count = param.initialData
+    })
+  }
 
   ngOnInit(): void {
 
@@ -22,13 +27,9 @@ export class ContentComponent implements OnInit {
   }
 
   onBtnClick = ($event: any) => {
-    if($event.keyCode === 13){
-      this.increaseCount.emit(this.count)
-      this.buttonClicked = !this.buttonClicked;
-      console.log($event);
-    } else {
-      console.error("Wrong key pressed.")
-    }
-   
+    this.increaseCount.emit(this.count)
+    this.buttonClicked = !this.buttonClicked;
+    this.router.navigate(['home'], {queryParams:{headerValue: this.count}});
+    console.log($event);
   }
 }

@@ -2,9 +2,10 @@
   <div [class]="buttonClicked ? 'green-class': 'red-class'">
     <input type="number" [(ngModel)]="count" />
     <br/>
-    <button (mouseup)="onBtnClick($event)" id="btn">Click</button>
+    <button (mouseover)="onBtnClick($event)" id="btn">Click</button>
     <br/>
-    <br/>
-    Current Count is {{count}}
   </div>
+  <br/>
+  <br/>
+  <a [routerLink]="['/home']" [queryParams]="{headerValue: count}" >Home</a>
 </div>
